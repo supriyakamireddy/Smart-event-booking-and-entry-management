@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Options</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4 text-primary">Choose Your Payment Method</h2>
+        <div class="row justify-content-center">
+            <!-- PhonePe Option -->
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Pay with PhonePe</h5>
+                        <p class="card-text">Enter your UPI ID and proceed to pay via PhonePe.</p>
+                        <form id="phonepe-form">
+                            <div class="form-group">
+                                <label for="phonepe-upi">PhonePe UPI ID:</label>
+                                <input type="text" id="phonepe-upi" class="form-control" placeholder="Enter UPI ID" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phonepe-amount">Amount:</label>
+                                <input type="number" id="phonepe-amount" class="form-control" placeholder="Enter Amount" required>
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="handlePayment('PhonePe')">Pay Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GPay Option -->
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Pay with GPay</h5>
+                        <p class="card-text">Enter your UPI ID and proceed to pay via GPay.</p>
+                        <form id="gpay-form">
+                            <div class="form-group">
+                                <label for="gpay-upi">GPay UPI ID:</label>
+                                <input type="text" id="gpay-upi" class="form-control" placeholder="Enter UPI ID" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gpay-amount">Amount:</label>
+                                <input type="number" id="gpay-amount" class="form-control" placeholder="Enter Amount" required>
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="handlePayment('GPay')">Pay Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="events.html" class="btn btn-secondary">Back to Events</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function handlePayment(method) {
+            let upiId, amount;
+
+            if (method === 'PhonePe') {
+                upiId = document.getElementById('phonepe-upi').value;
+                amount = document.getElementById('phonepe-amount').value;
+            } else if (method === 'GPay') {
+                upiId = document.getElementById('gpay-upi').value;
+                amount = document.getElementById('gpay-amount').value;
+            }
+
+            if (!upiId || !amount) {
+                alert('Please enter both UPI ID and amount!');
+                return;
+            }
+
+            // Redirect to confirmation page with details
+            const queryParams = new URLSearchParams({ method, upiId, amount }).toString();
+            window.location.href = `confirmation.html?${queryParams}`;
+        }
+    </script>
+</body>
+</html>

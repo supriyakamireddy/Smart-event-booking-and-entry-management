@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            margin-top: 50px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card mx-auto" style="width: 400px;">
+            <div class="card-body text-center">
+                <h3 class="text-success">Payment Successful!</h3>
+                <p class="card-text">Thank you for your payment.</p>
+                <p><strong>Payment Method:</strong> <span id="method"></span></p>
+                <p><strong>UPI ID:</strong> <span id="upiId"></span></p>
+                <p><strong>Amount Paid:</strong> ₹<span id="amount"></span></p>
+                <hr>
+                <h5>Your Ticket</h5>
+                <p id="ticket-number" class="font-weight-bold"></p>
+                <a href="events.html" class="btn btn-primary">Back to Events</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to Load Query Parameters -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('method').textContent = urlParams.get('method');
+        document.getElementById('upiId').textContent = urlParams.get('upiId');
+        document.getElementById('amount').textContent = urlParams.get('amount');
+        document.getElementById('ticket-number').textContent = 'TICKET-' + Math.floor(Math.random() * 1000000);
+    </script>
+</body>
+</html>
